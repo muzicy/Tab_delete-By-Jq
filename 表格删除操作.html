@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>数据管理操作系统</title>
+<style>
+* {margin:0 ;padding:0;}
+.container {width:500px;margin:20px auto;}
+h1 {margin:20px auto;width:500px;text-align:center; }
+#infor {width:500px;border:1px solid #ccc; margin:50px auto;border-collapse:collapse;}
+#infor td,#infor th{text-align:center;border:1px solid #ccc;}
+tr img {border:1px solid #ccc;padding:1px;width:50px;height:40px;}
+.controll {width:200px;float:right;}
+.controll input {padding:5px 20px;}
+.controll button {padding:5px 20px;}
+.larger {border:1px solid #ccc; padding:2px;position:absolute;width:100px;height:75px;display:none;}
+</style>
+<script src="jquery.js"></script>
+<script>
+$(document).ready(function(){
+  	//实现隔行变色
+  $("table tr:nth-child(odd)").css("background","#eee");
+  
+  //设置全选复选框
+  $(".controll input[name=allSel]").click(function(){
+	if(this.checked){
+	  $("table tr input[type=checkbox]").attr("checked",true);	
+    } else {
+	  $("table tr input[type=checkbox]").attr("checked",false);	
+    }
+  })
+  
+  //删除按钮事件
+  $(".container button").click(function(){
+	$("table tr input").each(function(index){
+	  if(this.checked) {		
+		$("table tr[class='user"+(parseInt(this.value)+parseInt(1))+"']").remove();  
+	  }	
+	})
+  })
+  
+  //增加鼠标移动显示图片事件
+  $("td img").mouseover(function(e){ 	
+	  
+	  $(".larger").attr("src",this.src).css({"top":(e.pageY+15)+"px","left":(e.pageX+15)+"px"}).show(500);	  
+	})
+	
+ $("td img").mouseout(function(e){	  	
+	 $(".larger").hide();  
+	})
+})
+</script>
+</head>
+
+<body>
+<div class="container">
+<h1>
+ 图书购买学生管理系统
+</h1>
+<table id="infor">
+<tbody>
+ <tr>
+  <th>选项</th>
+  <th>编号</th>
+  <th>封面</th>
+  <th>购书人</th>
+  <th>性别</th>
+  <th>购书价</th>
+ </tr>
+ <tr class="user1">
+  <td><input type="checkbox" value="0" /></td>
+  <td>1001</td>
+  <td><img src="../web开发小例子/img/p1s.jpg" alt=""/></td>
+  <td>张三</td>
+  <td>女</td>
+  <td>35.3</td>
+ </tr>
+ <tr class="user2">
+  <td><input type="checkbox" value="1" /></td>
+  <td>1002</td>
+  <td><img src="../web开发小例子/img/p2s.jpg" alt=""/></td>
+  <td>李四</td>
+  <td>男</td>
+  <td>45.3</td>
+ </tr>
+ <tr class="user3">
+  <td><input type="checkbox" value="2" /></td>
+  <td>1003</td>
+  <td><img src="../web开发小例子/img/p3s.jpg" alt=""/></td>
+  <td>王五</td>
+  <td>女</td>
+  <td>37.9</td>
+ </tr>
+ <tr class="user4">
+  <td><input type="checkbox" value="3" /></td>
+  <td>1004</td>
+  <td><img src="../web开发小例子/img/p4s.jpg" alt=""/></td>
+  <td>赵六</td>
+  <td>男</td>
+  <td>25.3</td>
+ </tr>
+</tbody>
+</table>
+<div class="controll">
+ <input type="checkbox" value="4" name="allSel" />全选
+ <button class="del">删除</button>
+</div>
+<img class="larger" src="../web开发小例子/img/p1s.jpg"/>
+</div>
+</body>
+</html>
